@@ -1,5 +1,5 @@
 <?php
-    class index{
+    class index_controller{
         private $vars = array();
 
         private $db_object = null;

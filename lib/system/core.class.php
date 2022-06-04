@@ -7,17 +7,13 @@
         private $db_object = null;
         private $error_handler_object = null;
 
-        public function __construct($page){
+        public function __construct(){
             require_once "./settings.inc.php";
             require_once PATH . "/lib/system/db.class.php";
             require_once PATH . "/lib/system/template.class.php";
 
-            spl_autoload_register(function ($model_class) {
-                require_once PATH . "/lib/" . $model_class . ".class.php";
-            });
-
-            if($page != ""){
-                $this->page = $page;
+            if(isset($_GET["page"]) && $_GET["page"] != ""){
+                $this->page = $_GET["page"];
             }else{
                 $this->page = "index";
             }
@@ -40,7 +36,8 @@
             }
             require_once $controller_path;
             
-            $page_class = new $this->page($this->db_object);
+            $page_class_name = $this->page . "_controller";
+            $page_class = new $page_class_name($this->db_object);
             
             if($page_class->IsLoginNeeded() && !isset($_SESSION["user_id"])){
                 $this->page = "login";
