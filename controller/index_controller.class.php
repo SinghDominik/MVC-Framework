@@ -7,7 +7,7 @@
         //--------
         //Settings
         //-------
-        private $need_loggedin = true;
+        private $need_loggedin = false;
         private $needed_rank = 0;
         //-------
 
